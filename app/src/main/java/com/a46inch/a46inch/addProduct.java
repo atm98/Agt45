@@ -48,16 +48,16 @@ public class addProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-        ProdName = (EditText) findViewById(R.id.Pname);
-        ProdPrice = (EditText) findViewById(R.id.Pprice);
-        ProdDesc = (EditText) findViewById(R.id.Pdescription);
-        ProdSeller = (EditText) findViewById(R.id.Pseller);
-        AddProdpic = (Button) findViewById(R.id.B9ppic);
-        SaveProductData = (Button) findViewById(R.id.B10saveproduct);
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        ProdName = (EditText) findViewById(R.id.Pname); //Product name
+        ProdPrice = (EditText) findViewById(R.id.Pprice); //Product price
+        ProdDesc = (EditText) findViewById(R.id.Pdescription); //Product description
+        ProdSeller = (EditText) findViewById(R.id.Pseller); //Seller name
+        AddProdpic = (Button) findViewById(R.id.B9ppic); //Product picture
+        SaveProductData = (Button) findViewById(R.id.B10saveproduct); //Save Product Data
+        mAuth = FirebaseAuth.getInstance(); //get current FirebaseAuth instance
+        mFirebaseDatabase = FirebaseDatabase.getInstance(); //get current FirebaseDatabase instance
+        myRef = mFirebaseDatabase.getReference(); //get current reference for FirebaseDatabase instance
+        mStorageRef = FirebaseStorage.getInstance().getReference(); //get current FirebaseStorage 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -78,9 +78,10 @@ public class addProduct extends AppCompatActivity {
         AddProdpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALLERY_INTENT);
+				//if the AddProdpic Button is clicke do this
+                Intent intent = new Intent(Intent.ACTION_PICK); //start ACTION_PICK intent
+                intent.setType("image/*"); //show only images
+                startActivityForResult(intent, GALLERY_INTENT); //move to Gallary intent
             }
         });
         SaveProductData.setOnClickListener(new View.OnClickListener() {
@@ -105,17 +106,18 @@ public class addProduct extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//revices result from startActivityForResult im form of requestCode,resultCode and data
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){
+        if(requestCode == GALLERY_INTENT && resultCode == RESULT_OK){ //if image selected with no errors
             progress.setMessage("Uploading");
             progress.show();
-            final Uri uri = data.getData();
-            final StorageReference childPath = mStorageRef.child("Products").child(myRef.getKey()).child(uri.getLastPathSegment());
-            childPath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final Uri uri = data.getData(); //geting Uri from data(i.e image)
+            final StorageReference childPath = mStorageRef.child("Products").child(myRef.getKey()).child(uri.getLastPathSegment()); //initialize FirebaseStorage reference childpath
+            childPath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() { //puts a file to the childpath reference of FirebaseStorage
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(addProduct.this,"UPLOAD DONE",Toast.LENGTH_LONG).show();
-                    progress.dismiss();
+                    Toast.makeText(addProduct.this,"UPLOAD DONE",Toast.LENGTH_LONG).show();//if the upload is successfull the show the message
+                    progress.dismiss(); //end progress
 
                 }
             });
@@ -126,18 +128,18 @@ public class addProduct extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        mAuth.addAuthStateListener(mAuthListener); //at the start of the activity Adds a listener that will be called when the connection becomes authenticated or unauthenticated.
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+            mAuth.removeAuthStateListener(mAuthListener);// at the end of the activity end thr AuthStateListener
         }
     }
-    private void toastMessage(String message){
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    private void toastMessage(String message){ // this methord is used to display toast messages
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show(); 
     }
 }
 

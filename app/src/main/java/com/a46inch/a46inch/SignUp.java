@@ -29,10 +29,10 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        SeditTextEmail = (EditText) findViewById(R.id.editemailSup);
-        SeditTextPassword = (EditText) findViewById(R.id.editpasswordSup);
-        SbuttonSignUp = (Button) findViewById(R.id.B3Sign);
-        mAuth = FirebaseAuth.getInstance();
+        SeditTextEmail = (EditText) findViewById(R.id.editemailSup); //Edit text for Email of user
+        SeditTextPassword = (EditText) findViewById(R.id.editpasswordSup); //Edit text for Password of the user
+        SbuttonSignUp = (Button) findViewById(R.id.B3Sign); //SignUp Button
+        mAuth = FirebaseAuth.getInstance(); // mAuth is the FireAuth instance
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -54,24 +54,24 @@ public class SignUp extends AppCompatActivity {
                     createAccount(SeditTextEmail,SeditTextPassword);
                 }
             }
-        });
+        }); // onClick methord to begin the Account Registeration process
     }
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        mAuth.addAuthStateListener(mAuthListener); // on start of activity Adds a listener that will be called when the connection becomes authenticated or unauthenticated.
     }
     @Override
     public void onStop() {
         super.onStop();
         if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+            mAuth.removeAuthStateListener(mAuthListener); //after the activity is stopped it removes the AuthStateListener
         }
     }
     public void createAccount(EditText mail,EditText passwd){
-        String email = mail.getText().toString().trim();
-        String password  = passwd.getText().toString().trim();
-        mAuth.createUserWithEmailAndPassword(email, password)
+        String email = mail.getText().toString().trim(); //converts the edittext email to string
+        String password  = passwd.getText().toString().trim(); //converts the edittext password to string
+        mAuth.createUserWithEmailAndPassword(email, password)  // methord to create account using strig email and password
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -85,6 +85,7 @@ public class SignUp extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
+							//if the the sign up is success then finish the activity and start the next one
                             finish();
                             startActivity( new Intent(getApplicationContext(),AddUserinfo.class));
                         }

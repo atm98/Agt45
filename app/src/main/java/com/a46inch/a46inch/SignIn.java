@@ -20,13 +20,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity {
     private static final String TAG = "SignIn";
-    private FirebaseAuth mAuth;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
-    private Button buttonSignIn;
-    private ProgressDialog progressDialog;
-    private CheckBox chkAdmin;
-    private String userID;
+    private FirebaseAuth mAuth; //declare FirebaseAuth object
+    private EditText editTextEmail; //declare editText user email
+    private EditText editTextPassword; //declare editText user password
+    private Button buttonSignIn; //declare Button for Signing in
+    private ProgressDialog progressDialog; // declareProgress bar
+    
+   
 
 
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -34,11 +34,11 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        editTextEmail = (EditText) findViewById(R.id.editemail);
-        editTextPassword = (EditText) findViewById(R.id.editpassword);
-        buttonSignIn = (Button) findViewById(R.id.B2Sign);
-        mAuth = FirebaseAuth.getInstance();
-        chkAdmin  = (CheckBox) findViewById(R.id.chkAdmin1);
+        editTextEmail = (EditText) findViewById(R.id.editemail); //initialize email of the user
+        editTextPassword = (EditText) findViewById(R.id.editpassword); //initialize password of the user
+        buttonSignIn = (Button) findViewById(R.id.B2Sign); //initialize Sign in button
+        mAuth = FirebaseAuth.getInstance(); //initialize FirebaseAuth instance
+        
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -53,12 +53,12 @@ public class SignIn extends AppCompatActivity {
                 // ...
             }
         };
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this); //initialize progressDialog 
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(view == buttonSignIn){
-                    signIn(editTextEmail,editTextPassword);
+                    signIn(editTextEmail,editTextPassword); // if button pressed run signIn methord
                 }
             }
         });
@@ -67,19 +67,20 @@ public class SignIn extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        mAuth.addAuthStateListener(mAuthListener); //at the start of the activity Adds a listener that will be called when the connection becomes authenticated or unauthenticated.
+		
     }
     @Override
     public void onStop() {
         super.onStop();
         if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
+            mAuth.removeAuthStateListener(mAuthListener); //removes the AuthStateListener at the end of the activity
         }
     }
-    public void signIn(final EditText mail, EditText passwd){
-        String email = mail.getText().toString().trim();
-        String password  = passwd.getText().toString().trim();
-        mAuth.signInWithEmailAndPassword(email, password)
+    public void signIn(EditText mail, EditText passwd){  //SignIn method
+        String email = mail.getText().toString().trim(); //converting editText email to string
+        String password  = passwd.getText().toString().trim(); //converting editText password to string
+        mAuth.signInWithEmailAndPassword(email, password) //signInWithEmailAndPassword accepts email and password as strings
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -95,6 +96,7 @@ public class SignIn extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         else{
+							//if there is a successful sign in then finish this activity and start next activity
                             finish();
 
 
