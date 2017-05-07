@@ -14,38 +14,49 @@
 
         <Button
             android:id="@+id/B7del"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:text="DELETE PRODUCT"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/B8add"
+            android:layout_marginTop="35dp"
+            android:clickable="true"
+            android:text="DELETE PRODUCT" />
+
+        <Button
+            android:id="@+id/Bupdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:clickable="true"/>
+            android:layout_below="@+id/B7del"
+            android:layout_marginTop="36dp"
+            android:clickable="true"
+            android:text="DELETE PRODUCT" />
 
         <TextView
             android:id="@+id/Welcome"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:text="WELCOME TO 46INCH ADMIN PANEL"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textSize="60dp"
-            android:textAlignment="center"/>
+            android:text="WELCOME TO 46INCH ADMIN PANEL"
+            android:textAlignment="center"
+            android:textSize="60dp" />
 
         <Button
             android:id="@+id/B8add"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Welcome"
-            android:layout_marginTop="35dp"
-            android:text="ADD PRODUCT"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:clickable="true"/>
+            android:layout_below="@+id/Welcome"
+            android:layout_marginTop="35dp"
+            android:clickable="true"
+            android:text="ADD PRODUCT" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

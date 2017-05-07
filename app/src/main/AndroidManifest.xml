@@ -28,7 +28,8 @@
         <activity android:name=".AddUserinfo" />
         <activity android:name=".Adminhome" />
         <activity android:name=".delProduct" />
-        <activity android:name=".addProduct"></activity>
+        <activity android:name=".addProduct" />
+        <activity android:name=".updateProduct"></activity>
     </application>
 
 </manifest>

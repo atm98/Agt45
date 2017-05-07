@@ -9,12 +9,14 @@ import android.widget.Button;
 public class Adminhome extends AppCompatActivity {
     private Button AddProduct; //declare AddProduct Button
     private Button DelProduct; //declare DelProduct Button
+    private Button UpdtProduct; //declare UpdtProduct Button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminhome);
         AddProduct = (Button) findViewById(R.id.B8add); //initialize AddProduct Button
         DelProduct = (Button) findViewById(R.id.B7del); //initialize DelProduct Button
+        UpdtProduct = (Button) findViewById(R.id.Bupdate); //initislize UpdtProduct Button
         AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +33,13 @@ public class Adminhome extends AppCompatActivity {
                 startActivity(new Intent(Adminhome.this,delProduct.class)); //create intent for next activity
             }
         });
-
+        UpdtProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // if UpdtProduct Button is Pressed do this
+                finish();
+                startActivity(new Intent(Adminhome.this,updateProduct.class)); //create intent for next activity
+            }
+        });
     }
 }
