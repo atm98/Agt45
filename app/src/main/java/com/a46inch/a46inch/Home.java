@@ -61,7 +61,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(Home.this,Adminhome.class));
+            startActivity(new Intent(Home.this,Settings_Screen.class));
             return true;
         }
 
