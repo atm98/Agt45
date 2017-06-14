@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,14 +15,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    ViewPager vp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); //initialize toolbar
         setSupportActionBar(toolbar);
+        vp = (ViewPager) findViewById(R.id.ViewPager) ;
+
 
 
 
@@ -61,7 +68,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(Home.this,Settings_Screen.class));
+            startActivity(new Intent(Home.this,SettingsActivity.class));
             return true;
         }
 
@@ -75,17 +82,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_Home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_myCart) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_MyOrders) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_MyAccount) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_Faq) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_Logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(Home.this, SignIn.class)); //Go back to home page
+            finish();
 
         }
 

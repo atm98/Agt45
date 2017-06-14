@@ -29,7 +29,10 @@
         <activity android:name=".Adminhome" />
         <activity android:name=".delProduct" />
         <activity android:name=".addProduct" />
-        <activity android:name=".updateProduct"></activity>
+        <activity android:name=".updateProduct" />
+        <activity android:name=".ProteinsActivity" />
+        <activity android:name=".PrepostActivity" />
+        <activity android:name=".OthersActivity"></activity>
     </application>
 
 </manifest>
