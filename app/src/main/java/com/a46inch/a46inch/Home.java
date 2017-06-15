@@ -14,12 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    ViewPager vp;
+    ListView CatagoryList;
+    public String[] CATAGORY={"PROTEINS","PRE/POST WORKOUT","OTHERS"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +33,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); //initialize toolbar
         setSupportActionBar(toolbar);
-        vp = (ViewPager) findViewById(R.id.ViewPager) ;
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.listview,CATAGORY);
+        CatagoryList = (ListView)  findViewById(R.id.CatagoryList);
+        CatagoryList.setAdapter(adapter);
+        CatagoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 1){
+                    Intent homeIntent = new Intent(Home.this, ProteinsActivity.class);
+                    startActivity(homeIntent);
+                }
+                else if(position == 2){
+                    Intent homeIntent = new Intent(Home.this, PrepostActivity.class);
+                    startActivity(homeIntent);
+                }
+                else if(position == 3){
+                    Intent homeIntent = new Intent(Home.this, OthersActivity.class);
+                    startActivity(homeIntent);
+                }
+            }
+        });
+
 
 
 
@@ -68,7 +94,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(Home.this,SettingsActivity.class));
+
             return true;
         }
 
