@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText SeditTextEmail;
     private EditText SeditTextPassword;
-
+    private String ems;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Button SbuttonSignUp;
 
@@ -51,7 +51,8 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(view == SbuttonSignUp){
-                    createAccount(SeditTextEmail,SeditTextPassword);
+                    ems = SeditTextEmail.getText().toString().trim();
+                    createAccount(SeditTextEmail,SeditTextPassword,ems);
                 }
             }
         }); // onClick methord to begin the Account Registeration process
@@ -68,7 +69,7 @@ public class SignUp extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener); //after the activity is stopped it removes the AuthStateListener
         }
     }
-    public void createAccount(EditText mail,EditText passwd){
+    public void createAccount(EditText mail,EditText passwd,String aa){
         String email = mail.getText().toString().trim(); //converts the edittext email to string
         String password  = passwd.getText().toString().trim(); //converts the edittext password to string
         mAuth.createUserWithEmailAndPassword(email, password)  // methord to create account using strig email and password
@@ -86,13 +87,20 @@ public class SignUp extends AppCompatActivity {
                         }
                         else{
 							//if the the sign up is success then finish the activity and start the next one
-                            finish();
-                            startActivity( new Intent(getApplicationContext(),AddUserinfo.class));
+                            Intent inten = new Intent(SignUp.this,AddUserinfo.class);
+                            sendData(inten,ems);
+
                         }
 
                         // ...
                     }
                 });
+    }
+
+    private void sendData(Intent intent,String inp) {
+         intent.putExtra("EMAIL_KEY",inp);
+         startActivity(intent);
+         finish();
     }
 
 

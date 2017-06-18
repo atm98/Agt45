@@ -11,7 +11,7 @@
         android:layout_height="551dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        android:background="#00f00f">
+        >
 
         <EditText
             android:id="@+id/editemail"
@@ -52,14 +52,6 @@
             android:layout_marginLeft="13dp"
             android:layout_marginStart="13dp" />
 
-        <CheckBox
-            android:id="@+id/chkAdmin1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:text="Admin"
-            android:layout_below="@+id/editpassword"
-            android:layout_centerHorizontal="true"
-            android:clickable="true"/>
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

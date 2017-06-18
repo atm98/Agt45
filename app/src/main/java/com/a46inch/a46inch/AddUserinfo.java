@@ -27,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class AddUserinfo extends AppCompatActivity {
     private static final String TAG = "AddUserinfo";
-
+    private String email;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText name,dob,phone,address;
     private Button saveData;
@@ -50,6 +50,8 @@ public class AddUserinfo extends AppCompatActivity {
         dob = (EditText) findViewById(R.id.dateobirth); //date of birth of the user
         phone = (EditText) findViewById(R.id.Phonenum); //phone number of the user
         address = (EditText) findViewById(R.id.Address); //address of the user
+        Intent i = this.getIntent();
+        email=i.getStringExtra("EMAIL_KEY");
         saveData = (Button) findViewById(R.id.B4save); //Button For saving data to Firebasedatabase
         mAuth = FirebaseAuth.getInstance(); //initalize instance for FirebaseAuth
         mFirebaseDatabase = FirebaseDatabase.getInstance(); //initalize instance for FirebaseDatabase
@@ -106,23 +108,28 @@ public class AddUserinfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 				//if save data is clicked do this
+
                 Log.d(TAG, "onClick: Submit pressed.");
                 String uname = name.getText().toString();
                 String udob = dob.getText().toString();
                 String uphone = phone.getText().toString();
                 String uaddress = address.getText().toString();
+                String uemail = email;
+
+
 
                 Log.d(TAG, "onClick: Attempting to submit to database: \n" +
                         "name: " + uname + "\n" +
                         "dob: " + udob + "\n" +
                         "phone number: " + uphone + "\n" +
-                        "Address: " + uaddress + "\n"
+                        "Address: " + uaddress + "\n" +
+                        "Email:" + uemail + "\n"
 
                 );
 
                 //handle the exception if the EditText fields are null
-                if (!uname.equals("") && !udob.equals("") && !uphone.equals("") && !uaddress.equals("")) { 
-                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress);
+                if (!uname.equals("") && !udob.equals("") && !uphone.equals("") && !uaddress.equals("") && !uemail.equals("")) {
+                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress,uemail);
                     FirebaseUser User = mAuth.getCurrentUser();
                     userID=User.getUid();
                     myRef.child("UserInfo").child(userID).setValue(userInformation);
