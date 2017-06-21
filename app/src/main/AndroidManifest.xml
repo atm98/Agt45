@@ -33,7 +33,8 @@
         <activity android:name=".ProteinsActivity" />
         <activity android:name=".PrepostActivity" />
         <activity android:name=".OthersActivity" />
-        <activity android:name=".wishlistActivity"></activity>
+        <activity android:name=".wishlistActivity" />
+        <activity android:name=".FAQActivity"></activity>
     </application>
 
 </manifest>

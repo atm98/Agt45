@@ -2,6 +2,7 @@ package com.a46inch.a46inch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
@@ -19,18 +20,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    @NonNull FirebaseAuth firebaseAuth;
     ListView CatagoryList;
+    String Uid;
     public String[] CATAGORY={"PROTEINS","PRE/POST WORKOUT","OTHERS"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        Uid =user.getUid();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); //initialize toolbar
         setSupportActionBar(toolbar);
         ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.listview,CATAGORY);
@@ -109,14 +115,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_Home) {
-            // Handle the camera action
+
+
         } else if (id == R.id.nav_myCart) {
+            Intent i2 = new Intent(Home.this,wishlistActivity.class);
+            startActivity(i2);
+
 
         } else if (id == R.id.nav_MyOrders) {
 
         } else if (id == R.id.nav_MyAccount) {
 
+
         } else if (id == R.id.nav_Faq) {
+            Intent i2 = new Intent(Home.this,FAQActivity.class);
+            startActivity(i2);
 
         } else if (id == R.id.nav_Logout) {
             FirebaseAuth.getInstance().signOut();

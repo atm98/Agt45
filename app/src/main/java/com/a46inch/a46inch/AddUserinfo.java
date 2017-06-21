@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.a46inch.a46inch.Classes.Userinfo;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -115,6 +116,7 @@ public class AddUserinfo extends AppCompatActivity {
                 String uphone = phone.getText().toString();
                 String uaddress = address.getText().toString();
                 String uemail = email;
+                String[] uwishlist = {};
 
 
 
@@ -123,13 +125,14 @@ public class AddUserinfo extends AppCompatActivity {
                         "dob: " + udob + "\n" +
                         "phone number: " + uphone + "\n" +
                         "Address: " + uaddress + "\n" +
-                        "Email:" + uemail + "\n"
+                        "Email:" + uemail + "\n" +
+                        "WishList" + uwishlist + "\n"
 
                 );
 
                 //handle the exception if the EditText fields are null
                 if (!uname.equals("") && !udob.equals("") && !uphone.equals("") && !uaddress.equals("") && !uemail.equals("")) {
-                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress,uemail);
+                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress,uemail,uwishlist);
                     FirebaseUser User = mAuth.getCurrentUser();
                     userID=User.getUid();
                     myRef.child("UserInfo").child(userID).setValue(userInformation);
