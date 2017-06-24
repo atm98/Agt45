@@ -61,7 +61,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
 
 
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout); //initialize DrawerLayout
@@ -125,7 +125,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.nav_MyOrders) {
 
         } else if (id == R.id.nav_MyAccount) {
-
+            Intent i2 = new Intent(Home.this,MyAccountActivity.class);
+            startActivity(i2);
 
         } else if (id == R.id.nav_Faq) {
             Intent i2 = new Intent(Home.this,FAQActivity.class);
@@ -133,7 +134,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         } else if (id == R.id.nav_Logout) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(Home.this, SignIn.class)); //Go back to home page
+            startActivity(new Intent(Home.this, SignActivity.class)); //Go back to home page
             finish();
 
         }

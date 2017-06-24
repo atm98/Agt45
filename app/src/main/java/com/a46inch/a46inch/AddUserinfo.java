@@ -26,6 +26,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddUserinfo extends AppCompatActivity {
     private static final String TAG = "AddUserinfo";
     private String email;
@@ -116,7 +119,8 @@ public class AddUserinfo extends AppCompatActivity {
                 String uphone = phone.getText().toString();
                 String uaddress = address.getText().toString();
                 String uemail = email;
-                String[] uwishlist = {};
+                List<String> uwishlist = new ArrayList<String>();
+                uwishlist.add("hello test");
 
 
 

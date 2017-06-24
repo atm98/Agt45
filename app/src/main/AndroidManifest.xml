@@ -34,7 +34,8 @@
         <activity android:name=".PrepostActivity" />
         <activity android:name=".OthersActivity" />
         <activity android:name=".wishlistActivity" />
-        <activity android:name=".FAQActivity"></activity>
+        <activity android:name=".FAQActivity" />
+        <activity android:name=".MyAccountActivity"></activity>
     </application>
 
 </manifest>
