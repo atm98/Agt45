@@ -1,5 +1,7 @@
 package com.a46inch.a46inch.Classes;
 
+import android.net.Uri;
+
 import java.util.List;
 
 /**
@@ -46,25 +48,42 @@ public class Userinfo {
     public void setAemail(String aemail) {
         this.aemail = aemail;
     }
+    public List<String> getAwishlist() {
+        return awishlist;
+    }
 
+    public void setAwishlist(List<String> awishlist) {
+        this.awishlist = awishlist;
+    }
 
     public String aname; //name of the user
     public String adob; //date of birth of user
     public String aaddress; //phone num of user
     public String aphone_num; //address of user
     public String aemail;
+    public Uri apicuri;
+
+    public Uri getApicuri() {
+        return apicuri;
+    }
+
+    public void setApicuri(Uri apicuri) {
+        this.apicuri = apicuri;
+    }
+
     public List<String> awishlist;
     public Userinfo(){
 			//empty constructor
     }
 
-    public Userinfo(String name, String dob, String phone_num, String address,String email,List<String> wishlist) {
+    public Userinfo(String name, String dob, String phone_num, String address,String email,List<String> wishlist,Uri picuri) {
         this.aname = name; 
         this.adob = dob; 
         this.aphone_num = phone_num;
         this.aaddress = address;
         this.aemail = email;
         this.awishlist = wishlist;
+        this.apicuri = picuri;
     } //Constructor for setting the data into the object
 
 }

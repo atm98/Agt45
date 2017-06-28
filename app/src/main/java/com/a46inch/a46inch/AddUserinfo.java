@@ -42,7 +42,7 @@ public class AddUserinfo extends AppCompatActivity {
     private Button savePic;
 
     private static final int GALLERY_INTENT=2;
-
+    private Uri picurl;
     private String userID;
     private FirebaseAuth mAuth;
     private ProgressDialog progress;
@@ -119,6 +119,7 @@ public class AddUserinfo extends AppCompatActivity {
                 String uphone = phone.getText().toString();
                 String uaddress = address.getText().toString();
                 String uemail = email;
+                Uri upicurl = picurl;
                 List<String> uwishlist = new ArrayList<String>();
                 uwishlist.add("hello test");
 
@@ -130,13 +131,14 @@ public class AddUserinfo extends AppCompatActivity {
                         "phone number: " + uphone + "\n" +
                         "Address: " + uaddress + "\n" +
                         "Email:" + uemail + "\n" +
+                        "Picurl:" + upicurl + "\n" +
                         "WishList" + uwishlist + "\n"
 
                 );
 
                 //handle the exception if the EditText fields are null
-                if (!uname.equals("") && !udob.equals("") && !uphone.equals("") && !uaddress.equals("") && !uemail.equals("")) {
-                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress,uemail,uwishlist);
+                if (!uname.equals("") && !udob.equals("") && !uphone.equals("") && !uaddress.equals("") && !uemail.equals("") && !upicurl.equals("")) {
+                    Userinfo userInformation = new Userinfo(uname,udob,uphone,uaddress,uemail,uwishlist,upicurl);
                     FirebaseUser User = mAuth.getCurrentUser();
                     userID=User.getUid();
                     myRef.child("UserInfo").child(userID).setValue(userInformation);
@@ -170,7 +172,7 @@ public class AddUserinfo extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(AddUserinfo.this,"UPLOAD DONE",Toast.LENGTH_LONG).show(); //after upload is success show the following message
                     progress.dismiss(); //end progress 
-
+                    urlset(childPath);
 
 
                 }
@@ -178,6 +180,9 @@ public class AddUserinfo extends AppCompatActivity {
 
 
         }
+    }
+    public void urlset(StorageReference sr){
+
     }
     @Override
     public void onStart() {
