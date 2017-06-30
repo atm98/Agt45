@@ -12,12 +12,15 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/profilePic"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@+id/HEADING"
             android:layout_centerHorizontal="true"
+
+            android:padding="1dp"
+
             />
 
         <LinearLayout

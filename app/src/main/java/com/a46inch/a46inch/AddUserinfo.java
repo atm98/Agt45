@@ -42,7 +42,7 @@ public class AddUserinfo extends AppCompatActivity {
     private Button savePic;
 
     private static final int GALLERY_INTENT=2;
-    private Uri picurl;
+    private String picurl;
     private String userID;
     private FirebaseAuth mAuth;
     private ProgressDialog progress;
@@ -119,7 +119,7 @@ public class AddUserinfo extends AppCompatActivity {
                 String uphone = phone.getText().toString();
                 String uaddress = address.getText().toString();
                 String uemail = email;
-                Uri upicurl = picurl;
+                String upicurl = picurl;
                 List<String> uwishlist = new ArrayList<String>();
                 uwishlist.add("hello test");
 
@@ -171,9 +171,8 @@ public class AddUserinfo extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(AddUserinfo.this,"UPLOAD DONE",Toast.LENGTH_LONG).show(); //after upload is success show the following message
-                    progress.dismiss(); //end progress 
-                    urlset(childPath);
-
+                    progress.dismiss(); //end progress
+                    picurl = taskSnapshot.getDownloadUrl().toString();
 
                 }
             });
@@ -181,9 +180,7 @@ public class AddUserinfo extends AppCompatActivity {
 
         }
     }
-    public void urlset(StorageReference sr){
 
-    }
     @Override
     public void onStart() {
         super.onStart();

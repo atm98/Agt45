@@ -35,7 +35,8 @@
         <activity android:name=".OthersActivity" />
         <activity android:name=".wishlistActivity" />
         <activity android:name=".FAQActivity" />
-        <activity android:name=".MyAccountActivity"></activity>
+        <activity android:name=".MyAccountActivity" />
+        <activity android:name=".EditDataActivity"></activity>
     </application>
 
 </manifest>
