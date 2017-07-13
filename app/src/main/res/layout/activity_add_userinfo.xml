@@ -93,6 +93,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp"
-            android:text="UPLOAD IMAHGE" />
+            android:text="UPLOAD IMAGE" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

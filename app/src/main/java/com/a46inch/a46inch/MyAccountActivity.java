@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class MyAccountActivity extends AppCompatActivity {
     private TextView name,dob,addr,phno,email;
     private ImageButton Profilepic;
@@ -36,6 +39,7 @@ public class MyAccountActivity extends AppCompatActivity {
     private Query query;
     private String url;
     private StorageReference mStorageref;
+    private Userinfo user1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +53,14 @@ public class MyAccountActivity extends AppCompatActivity {
         edit = (Button) findViewById(R.id.editButton);
         mAuth = FirebaseAuth.getInstance();
 
+
         user = mAuth.getCurrentUser();
 
         myRef=mFirebaseDatabase.getInstance().getReference().child("UserInfo").child(user.getUid());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Userinfo user1 = dataSnapshot.getValue(Userinfo.class);
+                 user1 = dataSnapshot.getValue(Userinfo.class);
                 display(user1.getAname(),user1.getAdob(),user1.getAaddress(),user1.getAphone_num(),user1.getAemail(),user1.getApicuri());
                 url = user1.getApicuri();
             }
@@ -72,10 +77,44 @@ public class MyAccountActivity extends AppCompatActivity {
                 preview(url);
             }
         });
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Updt(user1,myRef);
+
+            }
+        });
 
 
 
 
+    }
+
+    private void Updt(Userinfo u1, final DatabaseReference myRef) {
+        Dialog d2 = new Dialog(this);
+        d2.setTitle("UPDATE DATA");
+        d2.setContentView(R.layout.updateactivity);
+        final EditText name = (EditText) d2.findViewById(R.id.Updtname);
+        final EditText dob = (EditText) d2.findViewById(R.id.Updtdob);
+        final EditText address = (EditText) d2.findViewById(R.id.Updtaddress);
+        final EditText phoneno = (EditText) d2.findViewById(R.id.Updtphno);
+        name.setText(u1.getAname().toString());
+        address.setText(u1.getAaddress().toString());
+        dob.setText(u1.getAdob().toString());
+        phoneno.setText(u1.getAphone_num().toString());
+        final String email = u1.getAemail();
+        final List<String> s1 = u1.awishlist;
+        final String url = u1.getApicuri();
+        final Button updt = (Button) d2.findViewById(R.id.Updt);
+        updt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Userinfo uf1 = new Userinfo(name.getText().toString(),dob.getText().toString(),phoneno.getText().toString(),address.getText().toString(),email,s1,url);
+                myRef.setValue(uf1);
+
+            }
+        });
+        d2.show();
     }
 
     private void preview(String a) {
