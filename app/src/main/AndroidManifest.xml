@@ -10,32 +10,43 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoadingActivity">
+        android:theme="@style/AppTheme"
+
+        >
+        <activity android:name=".LoadingActivity"
+            android:theme="@style/AppTheme.Fullbackgd">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".SignActivity" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".SignUp" />
+        <activity android:name=".SignActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".SignIn"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".SignUp"
+            android:theme="@style/AppTheme.Fullbackgd"/>
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddUserinfo" />
-        <activity android:name=".Adminhome" />
-        <activity android:name=".delProduct" />
-        <activity android:name=".addProduct" />
-        <activity android:name=".updateProduct" />
-        <activity android:name=".ProteinsActivity" />
-        <activity android:name=".PrepostActivity" />
-        <activity android:name=".OthersActivity" />
-        <activity android:name=".wishlistActivity" />
-        <activity android:name=".FAQActivity" />
-        <activity android:name=".MyAccountActivity" />
+        <activity android:name=".AddUserinfo"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+
+        <activity android:name=".ProteinsActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".PrepostActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".OthersActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".wishlistActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".FAQActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
+        <activity android:name=".MyAccountActivity"
+            android:theme="@style/AppTheme.Fullbackgd"/>
     </application>
 
 </manifest>
