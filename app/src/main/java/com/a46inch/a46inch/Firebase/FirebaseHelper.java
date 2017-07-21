@@ -5,6 +5,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -14,12 +15,12 @@ import java.util.ArrayList;
  */
 
 public class FirebaseHelper {
-    DatabaseReference db;
+    Query db;
     public static final String TAG="FirebaseHelper";
     Boolean saved=null;
     ArrayList<Products> products = new ArrayList<>();
 
-    public FirebaseHelper(DatabaseReference db) {
+    public FirebaseHelper(Query db) {
         this.db = db;
     }
     //IMPLEMENT FETCH DATA AND FILL ARRAYLIST
