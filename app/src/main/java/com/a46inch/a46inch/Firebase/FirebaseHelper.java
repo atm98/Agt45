@@ -5,7 +5,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import java.util.ArrayList;
  */
 
 public class FirebaseHelper {
-    Query db;
+    DatabaseReference db;
     public static final String TAG="FirebaseHelper";
     Boolean saved=null;
     ArrayList<Products> products = new ArrayList<>();
 
-    public FirebaseHelper(Query db) {
+    public FirebaseHelper(DatabaseReference db) {
         this.db = db;
     }
     //IMPLEMENT FETCH DATA AND FILL ARRAYLIST
-    private void fetchData(DataSnapshot dataSnapshot)
+    private void fetchData(DataSnapshot dataSnapshot,String a)
     {
         products.clear();
 
@@ -32,29 +32,33 @@ public class FirebaseHelper {
         {
 
             Products product =ds.getValue(Products.class);
-            products.add(product);
+            if(product.getPcatagory().equals(a)) {
+                products.add(product);
+
+            }
+
 
         }
     }
     //READ BY HOOKING ONTO DATABASE OPERATION CALLBACKS
-    public ArrayList<Products> retrieve() {
+    public ArrayList<Products> retrieve(final String catagory) {
 
         db.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot);
+                fetchData(dataSnapshot,catagory);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot);
+                fetchData(dataSnapshot,catagory);
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot);
+                fetchData(dataSnapshot,catagory);
 
             }
 
@@ -75,7 +79,7 @@ public class FirebaseHelper {
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot);
+
             }
 
             @Override

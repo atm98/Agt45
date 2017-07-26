@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 public class ProductListActivity extends AppCompatActivity {
-    private Query db;
+    private DatabaseReference db;
     private FirebaseHelper helper;
     private ListView lv;
     private String catagory;
@@ -25,12 +25,12 @@ public class ProductListActivity extends AppCompatActivity {
         Intent list = this.getIntent();
         catagory = list.getStringExtra("CATAGORY");
 
-        db= FirebaseDatabase.getInstance().getReferenceFromUrl("https://inch-bd53c.firebaseio.com/").child("Products").orderByChild("pcatagory").equalTo(catagory);
+        db= FirebaseDatabase.getInstance().getReferenceFromUrl("https://inch-bd53c.firebaseio.com").child("Products");
 
         helper=new FirebaseHelper(db);
 
         lv = (ListView) findViewById(R.id.lv);
-        adapter =new customAdapter(this,helper.Populateall());
+        adapter =new customAdapter(this,helper.retrieve(catagory));
         lv.setAdapter(adapter);
 
 
