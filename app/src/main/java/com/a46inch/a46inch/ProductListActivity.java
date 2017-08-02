@@ -3,6 +3,7 @@ package com.a46inch.a46inch;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.a46inch.a46inch.CustomAdapters.customAdapter;
@@ -22,16 +23,18 @@ public class ProductListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
-        Intent list = this.getIntent();
-        catagory = list.getStringExtra("CATAGORY");
 
-        db= FirebaseDatabase.getInstance().getReferenceFromUrl("https://inch-bd53c.firebaseio.com").child("Products");
+
+        lv = (ListView) findViewById(R.id.lv);
+        db= FirebaseDatabase.getInstance().getReference().child("Products");
 
         helper=new FirebaseHelper(db);
 
-        lv = (ListView) findViewById(R.id.lv);
-        adapter =new customAdapter(this,helper.retrieve(catagory));
+
+        adapter =new customAdapter(this,helper.Populateall());
+
         lv.setAdapter(adapter);
+
 
 
     }

@@ -1,5 +1,7 @@
 package com.a46inch.a46inch.Firebase;
 
+import android.util.Log;
+
 import com.a46inch.a46inch.Classes.Products;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,41 +26,41 @@ public class FirebaseHelper {
         this.db = db;
     }
     //IMPLEMENT FETCH DATA AND FILL ARRAYLIST
-    private void fetchData(DataSnapshot dataSnapshot,String a)
+    private void fetchData(DataSnapshot dataSnapshot)
     {
         products.clear();
 
         for (DataSnapshot ds : dataSnapshot.getChildren())
         {
 
-            Products product =ds.getValue(Products.class);
-            if(product.getPcatagory().equals(a)) {
-                products.add(product);
+            Products product = ds.getValue(Products.class);
+            products.add(product);
+            Log.d("data",product.getPname());
 
-            }
+
 
 
         }
     }
     //READ BY HOOKING ONTO DATABASE OPERATION CALLBACKS
-    public ArrayList<Products> retrieve(final String catagory) {
+    public ArrayList<Products> retrieve() {
 
         db.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot,catagory);
+                fetchData(dataSnapshot);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot,catagory);
+                fetchData(dataSnapshot);
 
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                fetchData(dataSnapshot,catagory);
+                fetchData(dataSnapshot);
 
             }
 
@@ -79,6 +81,8 @@ public class FirebaseHelper {
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                fetchData(dataSnapshot);
+
 
             }
 

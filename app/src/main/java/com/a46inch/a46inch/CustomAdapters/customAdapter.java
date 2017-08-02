@@ -1,6 +1,7 @@
 package com.a46inch.a46inch.CustomAdapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class customAdapter extends BaseAdapter {
         if(convertView==null) {
 
             convertView = LayoutInflater.from(c).inflate(R.layout.model, viewGroup, false);
+            Log.d("if","contentviewnull");
 
         }
         TextView nameTxt= (TextView) convertView.findViewById(R.id.nameTxt);
@@ -47,13 +49,6 @@ public class customAdapter extends BaseAdapter {
         final Products s= (Products) this.getItem(position);
         nameTxt.setText(s.getPname());
         priceTxt.setText(s.getPprice());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //OPEN DETAIL
-
-            }
-        });
         return convertView;
     }
 
